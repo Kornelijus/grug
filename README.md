@@ -16,11 +16,11 @@ cd grug
 
 # Add current dir with script to your PATH
 # bash
-echo "export PATH=\$PATH:$(pwd)" > ~/.bashrc
+echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
 source ~/.bashrc
 
 # zsh
-echo "export PATH=\$PATH:$(pwd)" > ~/.zshrc
+echo "export PATH=\$PATH:$(pwd)" >> ~/.zshrc
 source ~/.zshrc
 ```
 
