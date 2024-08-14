@@ -21,3 +21,11 @@ echo "export PATH=\$PATH:$(pwd)" > ~/.bashrc
 # zsh
 echo "export PATH=\$PATH:$(pwd)" > ~/.zshrc
 ```
+
+# Configuration
+
+| Environment Variable       | Description                                                | Default Value     |
+| -------------------------- | ---------------------------------------------------------- | ----------------- |
+| `GRUG_ROOT`                | Path to directory where your git repositories are located. | Current directory |
+| `GRUG_DEFAULT_BRANCH`      | Default branch to search through.                          | `master`          |
+| `GRUG_FETCH_INTERVAL_MINS` | How often `git fetch` should be run on the main branches.  | `60`              |
