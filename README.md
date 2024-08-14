@@ -1,2 +1,23 @@
 # grug
-Grep Recursive Utility for Git
+
+**G**rep **R**ecursive **U**tility for **G**it
+
+Simple script to search through the main branches of all of your git repositories locally using `git grep`.  
+It will periodically run `git fetch` before searching to ensure results are (kinda) up to date.
+
+Shout out to everyone who can't afford GitLab Enterprise Edition :skull:
+
+# Installation
+
+```sh
+# Clone and navigate to the repo
+git clone https://github.com/Kornelijus/grug.git
+cd grug
+
+# Add current dir with script to your PATH
+# bash
+echo "export PATH=\$PATH:$(pwd)" > ~/.bashrc
+
+# zsh
+echo "export PATH=\$PATH:$(pwd)" > ~/.zshrc
+```
