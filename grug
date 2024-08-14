@@ -1,0 +1,56 @@
+#!/bin/bash
+
+root_dir=${GRUG_ROOT_DIR}
+fetch_interval_mins=${GRUG_FETCH_INTERVAL_MINS}
+fetch_last_updated_marker="/tmp/grug_last_updated"
+default_branch=${GRUG_DEFAULT_BRANCH}
+
+if [ -z "$root_dir" ]; then
+    root_dir=$(pwd)
+    echo "GRUG_ROOT_DIR not set, using current dir: $root_dir"
+fi
+
+if [ -z "$fetch_interval_mins" ]; then
+    fetch_interval_mins=60
+    echo "GRUG_FETCH_INTERVAL_MINS not set, using default: $fetch_interval_mins"
+fi
+
+if [ -z "$default_branch" ]; then
+    default_branch="master"
+    echo "GRUG_DEFAULT_BRANCH not set, using default: $default_branch"
+fi
+
+fetch_all() {
+    find "$root_dir" \
+        -mindepth 1  \
+        -maxdepth 1  \
+        -type d      \
+        -exec git -C {} fetch origin ${default_branch} \; 
+}
+
+grep_all() {
+    find "$root_dir" \
+        -mindepth 1  \
+        -maxdepth 1  \
+        -type d      \
+        -exec git -C {} --no-pager grep "$1" origin/${default_branch} -- \;
+}
+
+
+if [ -f "$fetch_last_updated_marker" ] && \
+   [ "$(find "$fetch_last_updated_marker" -mmin -"$fetch_interval_mins")" ];
+then
+    echo "Skipping fetch..."
+else
+    echo "Fetching changes..."  
+    touch "$fetch_last_updated_marker"
+    cd "$root_dir" && fetch_all
+fi
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: grug.sh <search_term>"
+    exit 1
+else 
+    grep_all "$1" 2> /dev/null
+fi
+
