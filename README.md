@@ -10,11 +10,11 @@ Shout out to everyone who can't afford GitLab Enterprise Edition :skull:
 # Installation
 
 ```sh
-# Clone and navigate to the repo
+# Clone repo and navigate to script dir
 git clone https://github.com/Kornelijus/grug.git
-cd grug
+cd grug/bin
 
-# Add current dir with script to your PATH
+# Add script to your PATH
 # bash
 echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
 source ~/.bashrc
